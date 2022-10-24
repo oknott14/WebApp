@@ -1,0 +1,39 @@
+.playlist-wrapper {
+    margin: 5px;
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+}
+
+img {
+    flex-grow: 10%;
+    height: 100px;
+    width: 100px;
+}
+.sm {
+    height: 50px;
+    width: 50px;
+}
+.lg {
+    height: 200px;
+    width: 200px;
+}
+
+.playlist-info {
+    flex-grow: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: left space-between;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.title {
+    font-size: large;
+    font-weight: bold;
+}
+
+.sub-info {
+    padding: 5px;
+    font-size: medium;
+}

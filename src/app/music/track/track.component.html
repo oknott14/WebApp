@@ -1,0 +1,15 @@
+<div class="track-row" *ngIf="track">
+    <div class="track-img">
+        <img [src]="track?.album.images[0].url">
+    </div>
+    <div class="track-name">
+        <span>{{track?.name}}</span>
+    </div>
+    <div class="track-album">
+        <span>{{track?.album.name}}</span>
+    </div>
+    <div class="duration">
+        <span>{{track?.duration_ms}}</span>
+    </div>
+</div>
+

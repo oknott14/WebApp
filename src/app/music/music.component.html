@@ -1,0 +1,24 @@
+<spotify-auth></spotify-auth>
+<div class="page-wrapper">
+    <div class="side-nav-container">
+        <div class="side-nav-fixed-header">
+            <ul>
+                <li><a href="http://localhost:4200/music/home">Home</a></li>
+                <li>New Music</li>
+            </ul>
+        </div>
+        <hr>
+        <div class="side-nav-content">
+            <mat-nav-list role="list" *ngFor="let playlist of playlists">
+                <a [routerLink]="['playlist', playlist.id]"><span class="side-list-item">{{playlist.name}}</span></a>
+            </mat-nav-list>
+        </div>
+    </div>
+    <div class="body-container">
+        <div class="body-content">
+            <router-outlet></router-outlet>
+        </div>
+        <spotify-player></spotify-player>
+    </div>
+</div>
+

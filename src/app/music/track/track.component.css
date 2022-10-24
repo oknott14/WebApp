@@ -1,0 +1,19 @@
+.track-row {
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.track-img {
+    flex-grow: 10%;
+    height: 40px;
+}  
+    .track-img img {
+        height: 100%;
+        width: auto;
+    }
+
+/*.track-title {
+    flex-grow: 
+}*/

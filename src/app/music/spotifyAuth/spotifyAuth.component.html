@@ -1,0 +1,10 @@
+<div><h1 mat-dialog-title>Authorize Us To Access Your Spotify</h1>
+    <div mat-dialog-content>
+        <p>We want to access your spotify, so let us. Dont ask why. Just hit ok...</p>
+    </div>
+    <div mat-dialog-actions>
+        <button *ngIf="!authPressed" mat-button color="primary" (click)="authorizeSpotify()">Authorize</button>
+        <button *ngIf="!authPressed" mat-button color="warn" (click)="cancel()">Cancel</button>
+        <button *ngIf="authPressed" mat-raised-button  color="primary" (click)="reload()">Close And Reload</button>
+    </div>
+</div>
