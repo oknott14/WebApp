@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
-import { Playlist } from './spotify.modules';
+import { Playlist } from '../../models/spotify.models';
 import { SpotifyService } from './spotify.service';
 
 @Injectable({providedIn: 'root'})
@@ -9,7 +9,7 @@ export class MusicService extends SpotifyService{
     private playlist: Playlist[] = [];
 
     getPlaylists() {
-        this.spotifyGetData<Playlist []>("http://localhost:2267/api/spotify/user/playlists", (data) => {
+        this.get<Playlist []>("/user/playlists").subscribe(data => {
             this.playlist = data
             this.playListsUpdated.next([...this.playlist])
         })

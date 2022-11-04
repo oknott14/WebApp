@@ -1,8 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const spotify = require('./routes/spotify')
-const app = express();
+const spotify = require('./routes/spotify.routes')
 
+const app = express();
 
 //Format responses to work with Angular
 app.use(bodyParser.json());

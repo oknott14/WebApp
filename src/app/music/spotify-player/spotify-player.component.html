@@ -1,0 +1,22 @@
+<div class="player">
+    <div class="song-container" *ngIf="track">
+        <img src="{{track.album.images[0].url}}">
+        <div class="track-info-wrapper">
+            <span>{{track.name}}</span>
+            <div class="track-action-wrapper">
+                <mat-icon>playlist_add</mat-icon>
+                <mat-icon>whatshot</mat-icon>
+            </div>
+        </div>
+    </div>
+    <div class="controls-container">
+        <div class="icon-wrapper">
+            <mat-icon>skip_previous</mat-icon>
+            <mat-icon>play_arrow</mat-icon>
+            <mat-icon>skip_next</mat-icon>
+        </div>
+    </div>
+    <div class="actions-container">
+        Actions
+    </div>
+</div>

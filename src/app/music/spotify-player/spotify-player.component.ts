@@ -1,22 +1,27 @@
-import { Component, OnInit, Input } from '@angular/core';
-//import { Spotify } from 'angular-spotify';
+import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute, ParamMap } from '@angular/router';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Track } from 'src/app/models/spotify.models';
+import { PlayerService } from '../services/player.service';
 
 
 @Component({
     selector: 'spotify-player',
     templateUrl: './spotify-player.component.html',
-    //styleUrls: ['./spotify-player.component.css']
+    styleUrls: ['./spotify-player.component.css']
 })
 export class SpotifyPlayerComponent implements OnInit {
-    player: any;
-    constructor(private http: HttpClient) {}
+    track?: Track;
+    queue: Track [] = [];
+    private sub: Subscription = new Subscription();
+    constructor(private player: PlayerService) {}
+
     ngOnInit(): void {
-        const url = 'http://localhost:2267/api/spotify/queue';
-        const uri = 'spotify:track:0oH0OIeKJSAT5bdFkbz20A'
-        
+        this.player.init();
+        /*this.sub.add(this.player.getPlaybackUpdatedListener().subscribe(playbackInfo => {
+            console.log("playback changed");
+            this.track = playbackInfo.track;
+            this.queue = playbackInfo.queue;
+        }))*/
     }
 }
 

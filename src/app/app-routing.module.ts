@@ -4,7 +4,7 @@ import { BankingComponent } from './Banking/banking.component';
 import { MusicHomeComponent } from './music/home/home.component';
 import { MusicComponent } from './music/music.component';
 import { PlaylistComponent } from './music/playlist/playlist.component';
-
+import { TagTrackComponent } from './music/track/tag-tracks/tag-track.component';
 
 const routes: Routes = [
   {
@@ -18,6 +18,10 @@ const routes: Routes = [
       {
         path: 'playlist/:playlistId',
         component: PlaylistComponent
+      },
+      {
+        path: 'untagged',
+        component: TagTrackComponent,
       }
     ]
   },
