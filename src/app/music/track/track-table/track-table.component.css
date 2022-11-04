@@ -32,4 +32,9 @@ td .actions {
 td span {
     overflow: hidden;
     text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+td .track-info {
+    flex: 0 0 30%;
 }

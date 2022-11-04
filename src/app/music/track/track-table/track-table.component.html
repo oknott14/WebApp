@@ -2,10 +2,12 @@
     <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let track">
-            <div class="vertical-center">
-                <div class="actions">
-                    <mat-icon (click)="playSong(track)">play_arrow</mat-icon>
-                    <mat-icon (click)="queueSong(track)">queue_music</mat-icon>
+            <div class="action-container">
+                <div class="vertical-center">
+                    <div class="actions">
+                        <mat-icon (click)="playSong(track)">play_arrow</mat-icon>
+                        <mat-icon (click)="queueSong(track)">queue_music</mat-icon>
+                    </div>
                 </div>
             </div>
         </td>

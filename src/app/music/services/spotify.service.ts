@@ -36,7 +36,7 @@ export class SpotifyService {
 
     protected post<t>(path: string, body: object) {
         var url = SpotifyService.rootUrl + path;
-        return this.http.post<SpotifyHttpResponse>(url, body).pipe(flatMap(response => {
+        return this.http.post<SpotifyHttpResponse>(url, body).pipe(map(response => {
             return this.checkResponse<t>(response);
         }));
     }

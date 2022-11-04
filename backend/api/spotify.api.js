@@ -93,22 +93,56 @@ exports.queueSong = function() {
         return await spotifyApi.queueSong(req.body.uri, req.body.device_id).then(
             (f) => {
                 console.log(f)
-                return res.status(200).json(spotifyDataResponse("ok"))
+                return res.status(200).json(spotifyDataResponse(true))
             }).catch(err => {
                 return res.status(401).json({message: 'Failed to add to queue', error: err})
             });
     }
 }
 
-exports.playSong = function() {
+exports.playTrack = function() {
     return async function (req, res, next) {
         console.log("Request to play track")
         spotifyApi.startOrResumeSong(req.params.device_id, req.body).then(g => {
             console.log("Track Playing")
-            return res.status(200).json({message: 'Track playing'})
+            return res.status(200).json(spotifyDataResponse(true))
         }).catch(err => {
             console.log("Failed to play track")
-            return res.status(401).json(err)
+            return res.status(401).json(spotifyAuthResponse(err))
+        })
+    }
+}
+
+exports.pauseTrack = function() {
+    return async function (req, res, next) {
+        console.log("Pausing track")
+        spotifyApi.pause().then(() => {
+            console.log("Track paused")
+            return res.status(200).json(spotifyDataResponse(true))
+        }).catch(err => {
+            return res.status(401).json(spotifyAuthResponse(err))
+        })
+    }
+}
+
+exports.nextTrack = function() {
+    return async function(req, res, next) {
+        console.log("Slipping to next track")
+        spotifyApi.skipToNext().then(() => {
+            return res.status(200).json(spotifyDataResponse(true))
+        }).catch(err => {
+            return res.status(401).json(spotifyAuthResponse(err))
+        })
+    }
+}
+
+exports.previousTrack = function() {
+    return async function(req, res, next) {
+        console.log("Skipping to previous track")
+        spotifyApi.skipToPrevious().then(() => {
+            return res.status(200).json(spotifyDataResponse(true))
+        }).catch(err => {
+            return res.status(401).json(spotifyAuthResponse(err))
         })
     }
 }

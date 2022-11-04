@@ -12,7 +12,10 @@ router.get('/devices', spotifyApi.getDevices());
 router.get('/playback-state', spotifyApi.getPlaybackState());
 router.get('/queue', spotifyApi.getQueue())
 router.post('/queue', spotifyApi.queueSong())
-router.post('/play/:deviceId', spotifyApi.playSong())
+router.post('/play/:deviceId', spotifyApi.playTrack())
+router.post('/pause', spotifyApi.pauseTrack())
+router.post('/next-track', spotifyApi.nextTrack())
+router.post('/previous-track', spotifyApi.previousTrack())
 
 //AUTHORIZATION
 router.get('/wait-for-authorization', (req, res, next) => {

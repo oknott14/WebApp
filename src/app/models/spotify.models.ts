@@ -86,3 +86,12 @@ export interface Device {
     type: string,
     volume_percent: number
 }
+
+export interface PlaybackInfo {
+    current_track?: Track,
+    progress_ms: number,
+    duration_ms: number,
+    is_playing: boolean,
+    repeat_state: string,
+    shuffle_state: boolean
+}

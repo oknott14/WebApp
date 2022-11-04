@@ -41,12 +41,12 @@ export class TrackTableComponent implements OnInit {
 
     playSong(track: Track) {
       if (this.context_uri) {
-        this.player.playSong(track, this.context_uri);
+        this.player.playTrack(track, this.context_uri);
       }
     }
 
     queueSong(track: Track) {
-      this.player.queueSong(track);
+      this.player.queueTrack(track);
     }
 
     ngOnDestroy() {
