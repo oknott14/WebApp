@@ -11,6 +11,7 @@ import { MusicModule } from './music/music.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { BankingComponent } from './Banking/banking.component';
+import { PlayerPageComponent } from './player-page/player-page.component';
 
 
 
@@ -21,6 +22,7 @@ import { BankingComponent } from './Banking/banking.component';
     HeaderComponent,    
     //BANKING
     BankingComponent,
+    PlayerPageComponent,
   ],
   imports: [
     BrowserModule,

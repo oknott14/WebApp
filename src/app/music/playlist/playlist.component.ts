@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Playlist, Track } from '../spotify.modules'
-import { PlaylistService } from './playlist.service';
+import { Playlist, Track } from '../../models/spotify.models'
+import { PlaylistService } from '../services/playlist.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 
@@ -10,6 +10,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
     styleUrls: ['./playlist.component.css']
 })
 export class PlaylistComponent implements OnInit {
+    private playlistId: string = '';
     public playlist?: Playlist;
     public tracks: Track [] = [];
     private sub: Subscription = new Subscription();
@@ -18,12 +19,15 @@ export class PlaylistComponent implements OnInit {
     ngOnInit(): void {
         this.route.paramMap.subscribe((paramMap: ParamMap) => {
             if (paramMap.has('playlistId')) {
-                this.playlistService.getPlaylist(paramMap.get('playlistId') as string)
-                this.sub.add(this.playlistService.getPlaylistsUpdateListener().subscribe((playlist) => {
+                this.playlistId = paramMap.get('playlistId') as string;
+                
+                this.playlistService.getPlaylist(this.playlistId)
+                this.sub.add(this.playlistService.getPlaylistUpdateListener().subscribe((playlist: Playlist) => {
                     this.playlist = playlist;
                 }))
 
-                this.sub.add(this.playlistService.getTracksUpdatedListener().subscribe((tracks) => {
+                this.playlistService.getTracks(this.playlistId)
+                this.sub.add(this.playlistService.getTracksUpdatedListener().subscribe((tracks: Track []) => {
                     this.tracks = tracks;
                 }))
             }

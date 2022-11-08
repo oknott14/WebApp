@@ -1,0 +1,108 @@
+.player-page-container {
+    width: 100vw;
+    height: calc(100vh - 70px);
+    padding-top: 20px;
+}
+.track-container {
+    height: 60%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+/* .track.md {
+    width: 15%;
+}
+
+.track.sm {
+    width: 5%
+} */
+.track {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.track.current-track { 
+    height: 100%
+}
+    .current-track .track-title {
+        font-size: 150%;
+        font-weight: bold;
+        padding: 10px;
+    }
+    .current-track .track-info {
+        padding: 2px;
+        font-size: 80%;
+    }
+
+/* .accent-track {
+    height: 80%;
+}
+
+.track-title {
+    margin: auto;
+    font-weight: bold;
+} 
+
+.md .track-title{
+    padding: 8px;
+    font-size: 100%;
+} 
+.sm .track-title{
+    padding: 4px;
+    font-size: 80%;
+}
+
+.track-info {
+    margin: auto;
+}
+
+.md .track-info{
+    padding: 1px;
+    font-size: 60%;
+} */
+
+.track-title {
+    font-size: 150%;
+    font-weight: bold;
+    width: fit-content;
+}
+.track-info {
+    font-size: 80%;
+    width: fit-content;
+}
+
+/* img {
+    width: 10%;
+} */
+.track.sm img {
+    height: 10%;
+    box-shadow: -3px -3px 3px darkgrey;
+}
+.track.md img {
+    height: 30%;
+    box-shadow: -10px -10px 7px darkgrey;
+}
+.track img {
+    height: 60%;
+    box-shadow: -15px -15px 10px darkgrey;
+}
+
+.toolbar {
+    width: 30%;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 10px;
+}
+
+.progress-bar {
+    width: 60%;
+    padding: 10px;
+}
+
+.center {
+    margin: auto;
+}

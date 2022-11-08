@@ -1,0 +1,42 @@
+<div *ngIf="track && queue.length > 2 && recentTracks.length > 2">
+    <div class="player-page-container">
+        <div class="track-container">
+            <div *ngFor="let i of [1, 0]" class="track" [ngClass]="size[i]">
+                <img [src]="queue[i].album.images[0].url">
+                <!-- <div *ngIf="i === 0" class="track-title">
+                    <span>{{queue[i].name}}</span>
+                </div> -->
+            </div>
+            <div class="track current-track">
+                <img [src]="track.album.images[0].url">
+            </div>
+            <div *ngFor="let i of [0, 1]" class="track" [ngClass]="size[i]">
+                <img [src]="recentTracks[i].album.images[0].url">
+                <!-- <div *ngIf="i === 0" class="track-title">
+                    <span>{{recentTracks[i].name}}</span>
+                </div> -->
+            </div>
+        </div>
+        
+        <div class="center track-title">
+            <span>{{track.name}}</span>
+        </div>
+        <div class="center track-info">
+            <span>{{track.album.name}}</span>
+        </div>
+        <div class="center track-info">
+            <span>{{track.artists[0].name}}</span>
+        </div>
+        
+        <div class="toolbar center">
+            <mat-icon (click)="skipPrevious()">skip_previous</mat-icon>
+            <mat-icon *ngIf="!isPlaying" (click)="playTrack()">play_arrow</mat-icon>
+            <mat-icon *ngIf="isPlaying" (click)="pauseTrack()">pause</mat-icon>
+            <mat-icon (click)="skipNext()">skip_next</mat-icon>    
+        </div>
+        <div class="center progress-bar">
+            <mat-progress-bar mode="determinate" [value]="track_completion"></mat-progress-bar>
+        </div>
+    </div>
+</div>
+

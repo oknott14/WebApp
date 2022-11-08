@@ -1,0 +1,46 @@
+.track-pane-container {
+    max-width: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+.track-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex: 1 1 0px;
+}
+
+.track-info-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 8px;
+    overflow: hidden;
+    flex: 1 1 0px;
+}
+
+.track-title {
+    padding: 2px;
+    font-size: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.track-artist {
+    padding: 2px;
+    font-size: 60%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.text-wrapper {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+img {
+    height: 60px;
+    flex: 0;
+}

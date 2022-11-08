@@ -11,6 +11,7 @@ import {MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule( {
     exports: [
@@ -25,7 +26,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         MatTableModule,
         MatIconModule,
         FormsModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        MatProgressBarModule
     ]
 })
 export class MaterialModule {};

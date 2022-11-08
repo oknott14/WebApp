@@ -9,43 +9,32 @@ tr {
 }
 
 td {
-    height: 100%;
-    overflow: hidden;
-    padding: 5px;
+    height: 50px;
 }
 
-.track-img {
-    height: 40px;
-} img {
-    height: 100%;
-}
-
-.track-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    overflow: hidden;
-    width: 100%;
-    height: 100%;
+img {
+    height: 90%;
 } 
 
-span {
-    height: 100%;
+td .vertical-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     overflow: hidden;
-    text-overflow: ellipsis;
+}
+
+td .actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+td span {
+    overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
 
-.track-name {
-    max-width: 300px;
-    font-size: small;
-    font-weight: 500;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+td .track-info {
+    flex: 0 0 30%;
 }
-.track-artist {
-    font-weight: 300;
-    font-size: x-small;
-}
-    

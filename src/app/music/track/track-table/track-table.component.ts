@@ -1,8 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Track } from '../../spotify.modules'
+import { Track, Album, Image, Artist } from '../../../models/spotify.models'
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { TrackService } from '../track.service';
+import { PlayerService } from '../../services/player.service';
+import { platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
 
 function Required(target: object, propertyKey: string) {
     Object.defineProperty(target, propertyKey, {
@@ -26,21 +27,26 @@ function Required(target: object, propertyKey: string) {
     styleUrls: ['./track-table.component.css']
 })
 export class TrackTableComponent implements OnInit {
+    @Input('context') context_uri?: string;
     @Input() @Required tracks: Track [] = [];
     public displayedColumns = ['actions', 'image', 'info', 'album', 'duration'];
     private sub: Subscription = new Subscription();
-    constructor(private trackService: TrackService, private route: ActivatedRoute) {}
+    constructor(private player: PlayerService,
+      private route: ActivatedRoute) {}
 
     ngOnInit(): void {
-        
+      this.route.paramMap.subscribe((paramMap: ParamMap) => {
+      });
     }
 
     playSong(track: Track) {
-      this.trackService.playSong(track.album.uri, [track.uri]);
+      if (this.context_uri) {
+        this.player.playTrack(track, this.context_uri);
+      }
     }
 
-    queueSong(uri: string) {
-      this.trackService.queueSong(uri);
+    queueSong(track: Track) {
+      this.player.queueTrack(track);
     }
 
     ngOnDestroy() {
