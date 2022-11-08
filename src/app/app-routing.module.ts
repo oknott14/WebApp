@@ -6,6 +6,7 @@ import { MusicComponent } from './music/music.component';
 import { PlaylistComponent } from './music/playlist/playlist.component';
 import { PlayerPageComponent } from './player-page/player-page.component';
 import { TagTrackComponent } from './music/track/tag-tracks/tag-track.component';
+import { LoginComponent } from './auth/login/login.component';
 
 const routes: Routes = [
   {
@@ -35,8 +36,12 @@ const routes: Routes = [
     component: BankingComponent
   },
   {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
     path: '',
-    redirectTo: 'music/home',
+    redirectTo: '/login',
     pathMatch: 'full'
   },
   {

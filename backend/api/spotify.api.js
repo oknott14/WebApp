@@ -1,178 +1,171 @@
 const SpotifyWebApi = require('./spotifyWeb.api');
+const responses = require('../shared/http.responses');
 const spotifyApi = SpotifyWebApi.spotifyApi;
-
-const spotifyAuthResponse = (err, redirectUrl = undefined) => {
-    return {
-        data: Array(0),
-        success: false,
-        authUrl: spotifyApi.createAuthorizeURL(SpotifyWebApi.Scopes),
-        requestUrl: redirectUrl,
-        error: err
-    }
-}
-
-const spotifyDataResponse = (data) => {
-    return {
-        data: data,
-        success: true,
-        error: null,
-    }
-}
+const authUrl = spotifyApi.createAuthorizeURL(SpotifyWebApi.Scopes);
 
 exports.getUserPlaylists = function () {
+    const message = (msg) => `User Playlists ${msg}`;
     return async function(req, res, next) {
-        console.log('playlists requested');
+        console.log(message("requested"));
         try {
+            //TODO: switch to active user spotify profile
             let data = await spotifyApi.getUserPlaylists('owen_knott');
-            return res.status(200).json(spotifyDataResponse(data.body.items));
+            return res.status(200).json(responses.successResponse(data.body.items, message("succeded")));
         } catch(err) {
-            console.log("failed to get playlists")
-            return res.status(200).json(spotifyAuthResponse({ message: 'Failed to get playlists', error: err }, req.url));
+            console.log(message("failed"))
+            return res.status(401).json(responses.spotifyErrorResponse(message("failed"), err, authUrl));
         }
     }
 }
 
 exports.getPlaylist = function () {
     return async function (req, res, next) {
+        const message = (msg) => `Playlist ${msg}`;
         console.log("playlist requested")
         spotifyApi.getPlaylist(req.params.id).then(data => {
-            return res.status(200).json(spotifyDataResponse(data.body));
+            return res.status(200).json(responses.successResponse(data.body, message("succeded")));
         }).catch(err => {
-            return res.status(500).json(spotifyAuthResponse({message: 'Failed to get playlist', error: err}))
+            return res.status(401).json(responses.spotifyErrorResponse(message("failed"), err, authUrl));
         })
     }
 }
 
 exports.getPlaylistTracks = function () {
     return async function (req, res, next) {
-        console.log('tracks requested')
+        const message = (msg) => `Tracks ${msg}`;
+        console.log(message('requested'))
         await spotifyApi.getPlaylistTracks(req.params.id, {
             limit: req.query.limit || 20, 
             offset: req.query.offset || 0
         }).then(async (data) => {
-            res.status(200).json(spotifyDataResponse(data.body))
+            res.status(200).json(responses.successResponse(data.body, message("succeded")))
         }).catch((err) => {
-            return res.json(spotifyAuthResponse({ message: 'Failed to get playlist\'s tracks', error: err }))
+            return res.status(401).json(responses.spotifyErrorResponse(message("failed"), err, authUrl))
         })
     }
 }
 
 exports.getDevices = function () {
     return async function (req, res, next) {
-        console.log('getting devices')
+        const message = (msg) => `Devices ${msg}`;
+        console.log(message('requested'))
         spotifyApi.getMyDevices().then((data) => {
-            return res.status(200).json(spotifyDataResponse(data.body.devices));
+            return res.status(200).json(responses.successResponse(data.body.devices, message("succeded")));
         }).catch(err => {
-            return res.json(spotifyAuthResponse({ message: 'Failed to get devices', error: err }))
+            return res.status(401).json(responses.spotifyErrorResponse(message("failed"), err, authUrl))
         });
     }
 }
 
 exports.getPlaybackState = function () {
     return async function (req, res, next) {
-        console.log('Playback state requested');
+        const message = (msg) => `Playback State ${msg}`;
+        console.log(message('requested'))
         spotifyApi.getMyCurrentPlaybackState().then((data) => {
-            return res.status(200).json(spotifyDataResponse(data));
+            return res.status(200).json(responses.successResponse(data, message("succeded")));
         }).catch(err => {
-            return res.status(401).json({message: 'Failed to get playback state', error: err});
+            return res.status(401).json(responses.spotifyErrorResponse(message("failed"), err, authUrl))
         })
     }
 }
 
 exports.getQueue = function() {
     return async function(req, res, next) {
-        console.log("Queue requested")
+        const message = (msg) => `Queue ${msg}`;
+        console.log(message('requested'))
         try {
             let queue = await spotifyApi.getQueue();
-            return res.status(200).json(spotifyDataResponse(queue));
+            return res.status(200).json(responses.successResponse(queue, message("succeded")));
         } catch (err) {
-            return res.status(401).json({message: 'Failed to get queue', error: err});
+            return res.status(401).json(responses.spotifyErrorResponse(message("failed"), err, authUrl))
         }   
     }
 }
 
 exports.queueSong = function() {
     return async function (req, res, next) { //what is this supposed to be??
+        const message = (msg) => `Queue Song ${msg}`;
+        console.log(message('requested'))
         return await spotifyApi.queueSong(req.body.uri, req.body.device_id).then(
-            (f) => {
-                console.log(f)
-                return res.status(200).json(spotifyDataResponse(true))
+            (data) => {
+                return res.status(200).json(responses.successResponse(data, message("succeded")))
             }).catch(err => {
-                return res.status(401).json({message: 'Failed to add to queue', error: err})
+                return res.status(401).json(responses.spotifyErrorResponse(message("failed"), err, authUrl))
             });
     }
 }
 
 exports.playTrack = function() {
     return async function (req, res, next) {
-        console.log("Request to play track")
-        spotifyApi.startOrResumeSong(req.params.device_id, req.body).then(g => {
-            console.log("Track Playing")
-            return res.status(200).json(spotifyDataResponse(true))
+        const message = (msg) => `Play track ${msg}`;
+        console.log(message('requested'))
+        spotifyApi.startOrResumeSong(req.params.device_id, req.body).then(data => {
+            return res.status(200).json(responses.successResponse(data, message("succeded")))
         }).catch(err => {
-            console.log("Failed to play track")
-            return res.status(401).json(spotifyAuthResponse(err))
+            return res.status(401).json(responses.spotifyErrorResponse(message("failed"), err, authUrl))
         })
     }
 }
 
 exports.pauseTrack = function() {
     return async function (req, res, next) {
-        console.log("Pausing track")
-        spotifyApi.pause().then(() => {
-            console.log("Track paused")
-            return res.status(200).json(spotifyDataResponse(true))
+        const message = (msg) => `Pause ${msg}`;
+        console.log(message('requested'))
+        spotifyApi.pause().then((data) => {
+            return res.status(200).json(responses.successResponse(data, message("succeded")))
         }).catch(err => {
-            return res.status(401).json(spotifyAuthResponse(err))
+            return res.status(401).json(responses.spotifyErrorResponse(message("failed"), err, authUrl))
         })
     }
 }
 
 exports.nextTrack = function() {
     return async function(req, res, next) {
-        console.log("Slipping to next track")
-        spotifyApi.skipToNext().then(() => {
-            return res.status(200).json(spotifyDataResponse(true))
+        const message = (msg) => `Skip to next ${msg}`;
+        console.log(message('requested'))
+        spotifyApi.skipToNext().then((data) => {
+            return res.status(200).json(responses.successResponse(data, message("succeded")))
         }).catch(err => {
-            return res.status(401).json(spotifyAuthResponse(err))
+            return res.status(401).json(responses.spotifyErrorResponse(message("failed"), err, authUrl))
         })
     }
 }
 
 exports.previousTrack = function() {
     return async function(req, res, next) {
-        console.log("Skipping to previous track")
-        spotifyApi.skipToPrevious().then(() => {
-            return res.status(200).json(spotifyDataResponse(true))
+        const message = (msg) => `Skip to previous ${msg}`;
+        console.log(message('requested'))
+        spotifyApi.skipToPrevious().then((data) => {
+            return res.status(200).json(responses.successResponse(data, message("succeded")))
         }).catch(err => {
-            return res.status(401).json(spotifyAuthResponse(err))
+            return res.status(401).json(responses.spotifyErrorResponse(message("failed"), err, authUrl))
         })
     }
 }
 
 exports.setShuffleState = function () {
     return async function(req, res, next) {
-        console.log("Changing shuffle state")
+        const message = (msg) => `Toggle Shuffle ${msg}`;
+        console.log(message('requested'))
         spotifyApi.setShuffle(req.body.shuffle_state).then(() => {
-            return res.status(200).json(spotifyDataResponse(req.body.shuffle_state));
+            return res.status(200).json(responses.successResponse(req.body.shuffle_state, message("succeded")));
         }).catch(err => {
-            console.log("Failed to change shuffle status");
-            return res.status(401).json(spotifyAuthResponse(err));
+            return res.status(401).json(responses.spotifyErrorResponse(message("failed"), err, authUrl))
         })
     }
 }
 
 exports.recentTracks = function () {
     return async function(req, res, next) {
-        console.log("Getting recent tracks")
+        const message = (msg) => `Recent Tracks ${msg}`;
+        console.log(message('requested'))
         spotifyApi.getMyRecentlyPlayedTracks({
             limit : 20
           }).then(data => {
-            console.log(data);
-            res.status(200).json(spotifyDataResponse(data.body.items));
+            res.status(200).json(responses.successResponse(data.body.items, message("succeded")));
           }).catch(err => {
             console.log("Failed to get recemt tracks");
-            return res.status(401).json(spotifyAuthResponse(err));
+            return res.status(401).json(responses.spotifyErrorResponse(message("failed"), err, authUrl))
         })
     }
 }

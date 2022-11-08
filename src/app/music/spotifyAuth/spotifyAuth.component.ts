@@ -2,7 +2,7 @@ import {Component, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
-import { SpotifyAuthService } from '../services/spotifyAuth.service';
+import { SpotifyAuthService } from '../../auth/spotifyAuth.service';
 
 @Component({
     selector: 'spotify-auth',

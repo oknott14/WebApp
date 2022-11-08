@@ -10,6 +10,8 @@ import { SpotifyPlayerComponent } from './spotify-player/player-toolbar/spotify-
 import { MaterialModule } from "../material.module";
 import { QueueDialog } from "./spotify-player/queue-dialog/queue-dialog.component";
 import { TrackPaneComponent } from "./track/track-pane/track-pane.component";
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { AuthInterceptor } from "../auth/auth.interceptor";
 
 @NgModule({
     declarations: [
@@ -28,6 +30,11 @@ import { TrackPaneComponent } from "./track/track-pane/track-pane.component";
         MaterialModule,
         AppRoutingModule,
     ],
+    providers: [{
+        provide : HTTP_INTERCEPTORS,
+        useClass: AuthInterceptor,
+        multi   : true,
+    }],
     bootstrap: [MusicComponent],
 })
 export class MusicModule {};

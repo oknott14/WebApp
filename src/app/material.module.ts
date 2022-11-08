@@ -12,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule( {
     exports: [
@@ -27,7 +28,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
         MatIconModule,
         FormsModule,
         BrowserAnimationsModule,
-        MatProgressBarModule
+        MatProgressBarModule,
+        MatProgressSpinnerModule,
     ]
 })
 export class MaterialModule {};
