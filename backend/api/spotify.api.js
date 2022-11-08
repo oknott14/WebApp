@@ -46,8 +46,11 @@ exports.getPlaylist = function () {
 exports.getPlaylistTracks = function () {
     return async function (req, res, next) {
         console.log('tracks requested')
-        spotifyApi.getPlaylistTracks(req.params.id).then((data) => {
-            return res.status(200).json(spotifyDataResponse(data.body.items));
+        await spotifyApi.getPlaylistTracks(req.params.id, {
+            limit: req.query.limit || 20, 
+            offset: req.query.offset || 0
+        }).then(async (data) => {
+            res.status(200).json(spotifyDataResponse(data.body))
         }).catch((err) => {
             return res.json(spotifyAuthResponse({ message: 'Failed to get playlist\'s tracks', error: err }))
         })
@@ -143,6 +146,33 @@ exports.previousTrack = function() {
             return res.status(200).json(spotifyDataResponse(true))
         }).catch(err => {
             return res.status(401).json(spotifyAuthResponse(err))
+        })
+    }
+}
+
+exports.setShuffleState = function () {
+    return async function(req, res, next) {
+        console.log("Changing shuffle state")
+        spotifyApi.setShuffle(req.body.shuffle_state).then(() => {
+            return res.status(200).json(spotifyDataResponse(req.body.shuffle_state));
+        }).catch(err => {
+            console.log("Failed to change shuffle status");
+            return res.status(401).json(spotifyAuthResponse(err));
+        })
+    }
+}
+
+exports.recentTracks = function () {
+    return async function(req, res, next) {
+        console.log("Getting recent tracks")
+        spotifyApi.getMyRecentlyPlayedTracks({
+            limit : 20
+          }).then(data => {
+            console.log(data);
+            res.status(200).json(spotifyDataResponse(data.body.items));
+          }).catch(err => {
+            console.log("Failed to get recemt tracks");
+            return res.status(401).json(spotifyAuthResponse(err));
         })
     }
 }

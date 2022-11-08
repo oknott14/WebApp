@@ -4,9 +4,14 @@ import { BankingComponent } from './Banking/banking.component';
 import { MusicHomeComponent } from './music/home/home.component';
 import { MusicComponent } from './music/music.component';
 import { PlaylistComponent } from './music/playlist/playlist.component';
+import { PlayerPageComponent } from './player-page/player-page.component';
 import { TagTrackComponent } from './music/track/tag-tracks/tag-track.component';
 
 const routes: Routes = [
+  {
+    path: 'music/player',
+    component: PlayerPageComponent
+  },
   {
     path: 'music', 
     component: MusicComponent,

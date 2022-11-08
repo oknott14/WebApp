@@ -1,0 +1,13 @@
+<div class="track-pane-container">
+    <div *ngIf="track" class="track-wrapper" [ngStyle]="{'height': height}">
+        <img [src]="track.album.images[0].url" [ngStyle]="{'height': height}">
+        <div class="track-info-wrapper">
+            <div class="text-wrapper">
+                <span class="track-title">{{track.name}}</span>
+            </div>
+            <div class="text-wrapper">
+                <span class="track-artist">{{track.artists[0].name}}</span>    
+            </div>
+        </div>
+    </div>
+</div>

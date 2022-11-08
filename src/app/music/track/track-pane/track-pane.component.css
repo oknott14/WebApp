@@ -1,29 +1,13 @@
-.player {
-    display: flex;
-    flex-direction: row;
+.track-pane-container {
+    max-width: 100%;
     width: 100%;
-    height: 60px;
-}
-
-.song-container {
-    height: 60px;
-    flex: 0 0 40%;
-}
-.controls-container {
-    flex: 0 0 20%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    padding: 5px;
-}
-.actions-container {
-    flex: 0 0 40%;
+    overflow: hidden;
 }
 
 .track-wrapper {
     display: flex;
     flex-direction: row;
+    flex: 1 1 0px;
 }
 
 .track-info-wrapper {
@@ -31,18 +15,26 @@
     flex-direction: column;
     justify-content: center;
     padding-left: 8px;
+    overflow: hidden;
+    flex: 1 1 0px;
 }
 
 .track-title {
     padding: 2px;
     font-size: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .track-artist {
     padding: 2px;
     font-size: 60%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
-span {
+.text-wrapper {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -50,9 +42,5 @@ span {
 
 img {
     height: 60px;
-}
-
-.icon-wrapper {
-    width: fit-content;
-    margin: auto;
+    flex: 0;
 }

@@ -1,17 +1,46 @@
 .page-wrapper {
-    display: flex;
-    flex-direction: row;
+    position: relative;
     height: 100%;
     width: 100%;
 }
 
-.side-nav-container {
+.side-nav-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 15%;
-    padding-left: 10px;
-    padding-right: 10px;
+    overflow: hidden;
+}
+
+.side-nav-container {
+    height: 100%;
+    width: 100%;
+    margin-left: 10px;
+    margin-right: 10px;
     display: flex;
     flex-direction: column;
     overflow: hidden;
+}
+
+.body-container {
+    position: absolute;
+    left: 15%;
+    top: 0;
+    right: 0;
+    bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    flex: 1 1;
+    overflow: hidden;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.body-content {
+    overflow: scroll;
+    text-overflow: ellipsis;
+    -ms-overflow-style: none;  /* Hide scrollbar IE and Edge */
+    scrollbar-width: none; /* Hide scrollbar */
 }
 
 .side-nav-fixed-header {
@@ -45,29 +74,13 @@ span.side-list-item {
     text-overflow: ellipsis;
 }
 
-.body-container {
-    display: flex;
-    flex-direction: column;
-    width: 85%;
-    height: 100%;
-    overflow: hidden;
-}
-
-.body-content {
-    overflow: scroll;
-    height: 100%;
-    width: 100%;
-    padding-left: 10px;
-    padding-right: 10px;
-    text-overflow: ellipsis;
-    -ms-overflow-style: none;  /* Hide scrollbar IE and Edge */
-    scrollbar-width: none; /* Hide scrollbar */
-}
-
 .body-content::-webkit-scrollbar { /* Hide scrollbar */
     display: none;
 }
 
-/* music-body {
-    width: 100%;
-} */
+spotify-player {
+    position: absolute;
+    bottom: 0;
+    left: 15%;
+    right: 0;
+}

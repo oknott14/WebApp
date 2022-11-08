@@ -1,0 +1,26 @@
+<div class="player-container">
+    <div class="player">
+        <div class="song-container">
+            <track-pane [track]="track" [height]="'60px'"></track-pane>
+        </div>
+        <div class="controls-container">
+            <div class="icon-wrapper center">
+                <mat-icon (click)="skipPrevious()">skip_previous</mat-icon>
+                <mat-icon *ngIf="!isPlaying" (click)="playTrack()">play_arrow</mat-icon>
+                <mat-icon *ngIf="isPlaying" (click)="pauseTrack()">pause</mat-icon>
+                <mat-icon (click)="skipNext()">skip_next</mat-icon>
+            </div>
+            <mat-progress-bar mode="determinate" [value]="track_completion"></mat-progress-bar>
+        </div>
+        <div class="actions-container">
+            <div class="up-next" *ngIf="track_completion > 85 && track_completion < 97">
+                <track-pane [track]="queue[0]" [height]="'40px'"></track-pane>
+            </div>
+            <div class="actions icon-wrapper">
+                <mat-icon (click)="showQueue()">library_add</mat-icon>
+                <mat-icon (click)="setShuffle()" [ngClass]="{'active': shuffle}">shuffle</mat-icon>
+                <mat-icon [routerLink]="['player']">fullscreen</mat-icon>
+            </div>
+        </div>
+    </div>
+</div>

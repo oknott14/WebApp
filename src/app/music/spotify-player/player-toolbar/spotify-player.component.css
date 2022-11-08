@@ -1,0 +1,58 @@
+.player-container {
+    width: 100%;
+    height: 60px;
+}
+
+.player {
+    display: flex;
+    flex-direction: row;
+    flex: 1 1;
+}
+
+.song-container {
+    height: 60px;
+    flex: 1 1 40%;
+}
+.controls-container {
+    flex: 1 1 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.actions-container {
+    flex: 1 1 40%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.up-next {
+    flex: 1 1 50%;
+    border: 1px solid grey;
+    border-radius: 5px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+.icon-wrapper {
+    width: fit-content;
+}
+
+mat-icon {
+    margin: 2px;
+}
+
+mat-icon:hover {
+    /*height: 26px;
+    width: 26px;*/
+    font-weight: bold;
+}
+
+mat-icon.active {
+    color: green;
+}
+center {
+    margin: auto;
+}

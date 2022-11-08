@@ -1,24 +1,27 @@
 <spotify-auth></spotify-auth>
 <div class="page-wrapper">
-    <div class="side-nav-container">
-        <div class="side-nav-fixed-header">
-            <ul>
-                <li><a routerLink="/home">Home</a></li>
-                <li><a routerLink="/untagged">Untagged Music</a></li>
-            </ul>
-        </div>
+    <div class="side-nav-wrapper">
+        <div class="side-nav-container">
+            <div class="side-nav-fixed-header">
+                <ul>
+                    <li><a routerLink="/home">Home</a></li>
+                    <li><a routerLink="/untagged">Untagged Music</a></li>
+                </ul>
+            </div>
         <hr>
-        <div class="side-nav-content">
-            <mat-nav-list role="list" *ngFor="let playlist of playlists">
-                <a [routerLink]="['playlist', playlist.id]"><span class="side-list-item">{{playlist.name}}</span></a>
-            </mat-nav-list>
+            <div class="side-nav-content">
+                <mat-nav-list role="list" *ngFor="let playlist of playlists">
+                    <a [routerLink]="['playlist', playlist.id]"><span class="side-list-item">{{playlist.name}}</span></a>
+                </mat-nav-list>
+            </div>
         </div>
     </div>
+    
     <div class="body-container">
         <div class="body-content">
             <router-outlet></router-outlet>
         </div>
-        <spotify-player></spotify-player>
     </div>
+    <spotify-player></spotify-player>
 </div>
 

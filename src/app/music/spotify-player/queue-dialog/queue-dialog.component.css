@@ -1,0 +1,22 @@
+.wrapper {
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+}
+
+.close-action {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.title {
+    height: 10%;
+    text-align: center;
+    margin: 0px;
+    padding: 0px;
+}
+
+.content {
+    height: 85%;
+}
