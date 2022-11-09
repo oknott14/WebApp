@@ -9,7 +9,7 @@ exports.getUserPlaylists = function () {
         console.log(message("requested"));
         try {
             //TODO: switch to active user spotify profile
-            let data = await spotifyApi.getUserPlaylists('owen_knott');
+            let data = await spotifyApi.getUserPlaylists(req.user.spotify_username);
             return res.status(200).json(responses.successResponse(data.body.items, message("succeded")));
         } catch(err) {
             console.log(message("failed"))

@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const errorResponse = require('../shared/http.responses').errorResponse;
+const getUser = require('../controllers/user.controller').getUserById;
 require('dotenv').config()
 
 exports.verifyToken = function () {
@@ -18,7 +19,7 @@ exports.verifyToken = function () {
 
         
             const decoded = jwt.verify(token, process.env.JWT_SECRET);
-            req.user = decoded;
+            req.user = await getUser(decoded.userId)
             /*if (decoded.exp < new Date().valueOf()) {
                 throw Error("Token has expired");
             }*/

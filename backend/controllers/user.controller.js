@@ -39,3 +39,7 @@ exports.login = async function(email, password) {
         })
     })
 }
+
+exports.getUserById = async function (id) {
+    return User.findOne({_id: id});
+}

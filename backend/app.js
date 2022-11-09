@@ -10,7 +10,7 @@ require('./database').connection();
 
 const app = express();
 const corsOptions = {
-    origin: 'http://localhost:4200',
+    origin: 'http://localhost:4200, */*',
     optionsSuccessStatus: 200,
 }
 
