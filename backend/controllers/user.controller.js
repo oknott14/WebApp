@@ -28,13 +28,13 @@ exports.login = async function(email, password) {
         if (!resp) {
             throw Error("Incorrect Password");
         }
-        const token = jwt.sign({date: Date(), email: usr.email, userId: usr._id}, process.env.JWT_SECRET, { expiresIn: "1d"});
+        const token = jwt.sign({date: Date(), email: usr.email, userId: usr._id}, process.env.JWT_SECRET, { expiresIn: "1w"});
         console.log("Logged in")
         usr.token = token;
         return usr.save().then(() => {
             return {
                 token: token,
-                id: usr._id
+                user: usr
             }
         })
     })
@@ -42,4 +42,14 @@ exports.login = async function(email, password) {
 
 exports.getUserById = async function (id) {
     return User.findOne({_id: id});
+}
+
+exports.updateUserSpotifyTokens = async function(id, access, refresh, expiration) {
+    console.log("Updating user spotify tokens");
+    return exports.getUserById(id).then(user => {
+        user.spotify_access_token = access;
+        user.spotify_refresh_token = refresh;
+        user.spotify_token_expiration = new Date().valueOf() + expiration;
+        user.save();
+    })
 }

@@ -165,8 +165,11 @@ export class PlayerService extends SpotifyService {
     }
 
     getQueue() {
-        this.get<Track []>('/queue').subscribe(data => {
-            this.queue = data.body.queue;
+        this.get<Track []>('/queue').subscribe(queue => {
+            this.queue = queue.map((q: any) => {
+                q.id = q.spotifyId;
+                return q;
+            });
             this.queueUpdated.next([...this.queue])
         })
     }
@@ -209,7 +212,7 @@ export class PlayerService extends SpotifyService {
 
     private updateTrack(track: Track, progress_ms = 0, is_playing = true) {
         this.playbackInfo.current_track = track;
-        this.playbackInfo.duration_ms = track.duration_ms;
+        this.playbackInfo.duration_ms = track.duration;
         this.playbackInfo.progress_ms = progress_ms;
         this.playbackInfo.is_playing = is_playing;
         this.updatePlayback();

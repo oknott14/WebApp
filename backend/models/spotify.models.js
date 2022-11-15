@@ -1,45 +1,47 @@
 const mongoose = require('mongoose');
+const uniqueValidator = require('mongoose-unique-validator');
 
 const playlistSchema = mongoose.Schema({
-    id: {type: String, required: false },
+    spotifyId: {type: String, required: false, unique: true },
     name: {type: String, required: true },
     description: { type: String, required: false },
-    owner: {type: Object, required: true },
-    collaborative: {type: Boolean, required: true },
-    href: {type: String, required: true },
-    image_url: {type: String, required: true },
-    public: boolean,
+    owner: {type: String, required: true },
+    imageUrls: [{type: String, required: true }],
     uri: {type: String, required: true },
-    primary_color: {type: String, required: true },
-    external_urls: {type: Array, required: true },
-    snapshot_id: {type: String, required: true },
-    tracks: {type: Array, required: true },
-    type: {type: String, required: true },
+    numTracks: {type: Number, required: true },
 });
+
+playlistSchema.plugin(uniqueValidator)
 exports.Playlist = mongoose.model('Playlist', playlistSchema);
 
 const trackSchema = mongoose.Schema({
-    id: {type: String, required: false },
-    name: {type: String, required: true },
-    image_url: {type: String, required: true },
-    album: {type: String, required: true },
-    artists: {type: Array, required: true },
-    disc_number: {type: String, required: true },
-    duration_ms: {type: Number, required: true },
-    eppisode: {type: Boolean, required: true },
-    explicit: {type: Boolean, required: true },
-    external_ids: {type: Array, required: true },
-    external_urls: {type: Array, required: true },
-    href: {type: String, required: true },
-    is_local: {type: Boolean, required: true },
-    popularity: {type: String, required: true },
-    track: {type: Boolean, required: true },
-    track_number: {type: Number, required: true },
-    type: {type: String, required: true },
+    spotifyId: {type: String, required: true },
     uri: {type: String, required: true },
+    analysisId: {type: String, required: true},
+    name: {type: String, required: true },
+    album: {type: Object, required: true },
+    imageUrls: [{type: String, required: true }],
+    artists: [{type: Object, required: true }],
+    duration: {type: Number, required: true },
+    explicit: {type: Boolean, required: true },
+    popularity: {type: String, required: true },
+    trackNumber: {type: Number, required: true },
+    danceability: {type: Number, required: true },
+    energy: {type: Number, required: true },
+    key: {type: Number, required: true },
+    loudness: {type: Number, required: true },
+    mode: {type: Number, required: true },
+    speechiness: {type: Number, required: true },
+    acousticness: {type: Number, required: true },
+    instrumentalness: {type: Number, required: true },
+    liveness: {type: Number, required: true },
+    valence: {type: Number, required: true },
+    tempo: {type: Number, required: true },
+    time_signature: {type: Number, required: true },
 });
+trackSchema.plugin(uniqueValidator);
 exports.Track = mongoose.model('Track', trackSchema);
-
+/*
 const albumSchema = mongoose.Schema({
     id: {type: String, required: false },
     name: {type: String, required: true },
@@ -64,3 +66,4 @@ const artistSchema = mongoose.Schema({
     uri: {type: String, required: true },
 });
 exports.Artist = mongoose.Schema('Artist', artistSchema);
+*/

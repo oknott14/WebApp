@@ -23,6 +23,7 @@ export class AuthService {
                 console.log(resp)
                 window.sessionStorage.setItem('userId', resp.data.id);
                 window.sessionStorage.setItem('token', resp.data.token);
+                console.log("Logged in")
                 this.router.navigateByUrl('/music/home');
             }
         })

@@ -18,11 +18,15 @@ export class PlaylistService extends SpotifyService {
     }
 
     getTracks(id: string) {
-        this.get<Track []>(`/playlist/${id}/tracks`).subscribe(data => {
-            this.tracks = data.items.map((track: any) => track.track);
+        this.get<Track []>(`/playlist/${id}/tracks`).subscribe(tracks => {
+            this.tracks = tracks.map((track: Track) => {
+                track.id = track.spotifyId;
+                return track;
+            });
+            console.log(this.tracks[0])
             this.tracksUpdated.next([...this.tracks]);
-            if (data.total > 20) {
-                this.getAdditionalTracks(id, 50, data.total / 20);
+            if (this.playlist?.tracks.total > 20) {
+                this.getAdditionalTracks(id, 50, this.playlist?.tracks.total / 20);
             }
         })
     }

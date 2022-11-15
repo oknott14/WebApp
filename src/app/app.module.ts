@@ -14,6 +14,8 @@ import { BankingComponent } from './Banking/banking.component';
 import { PlayerPageComponent } from './player-page/player-page.component';
 import { LoginComponent } from './auth/login/login.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
+import { SpotifyAuthComponent } from './auth/spotify/spotifyAuth.component';
+import { SpotifyAuthDialog } from './auth/spotify/spotifyAuth.dialog';
 
 
 
@@ -26,13 +28,15 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     BankingComponent,
     PlayerPageComponent,
     LoginComponent,
+    SpotifyAuthComponent,
+    SpotifyAuthDialog,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     MaterialModule,
-    MusicModule
+    MusicModule,
   ],
   providers: [{
       provide : HTTP_INTERCEPTORS,

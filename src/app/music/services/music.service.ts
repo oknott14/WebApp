@@ -8,6 +8,12 @@ export class MusicService extends SpotifyService{
     private playListsUpdated = new Subject<Playlist []>();
     private playlist: Playlist[] = [];
 
+    checkSpotifyAuth() {
+        this.get('/spotify/check-auth').subscribe(data => {
+            console.log(data);
+        })
+    }
+
     getPlaylists() {
         this.get<Playlist []>("/user/playlists").subscribe(data => {
             this.playlist = data

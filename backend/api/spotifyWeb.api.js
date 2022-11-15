@@ -13,6 +13,16 @@ const spotifyCredentials = {
     redirectUri: process.env.SPOTIFY_REDIRECT_URI
 }
 
+exports.createCredentials = function(accessToken, refreshToken) {
+  return {
+    accessToken: accessToken,
+    refreshToken: refreshToken,
+    clientId: process.env.SPOTIFY_CLIENT_ID,
+    clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
+    redirectUri: process.env.SPOTIFY_REDIRECT_URI
+  }
+}
+
 exports.Scopes = [
     'ugc-image-upload',
     'user-read-playback-state',
@@ -35,7 +45,7 @@ exports.Scopes = [
     'user-read-private'
 ];
 
-const spotifyApi = new SpotifyWebApi(spotifyCredentials);
+const spotifyApi = new SpotifyWebApi();
 
 spotifyApi.getQueue = function(callback) {
   return WebApiRequest.builder(spotifyApi.getAccessToken())

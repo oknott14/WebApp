@@ -8,22 +8,21 @@ import { SpotifyAuthService } from './spotifyAuth.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(private route: ActivatedRoute, private router: Router, private spotifyAuth : SpotifyAuthService){}
+  constructor(private router: Router, private spotifyAuth : SpotifyAuthService){}
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     req = req.clone({
       setHeaders: {
         'Content-Type' : 'application/json; charset=utf-8',
         'Accept'       : 'application/json',
-        'x-access-token': `${window.sessionStorage.getItem('token')}`,
+        'Authorization': `Bearer ${window.sessionStorage.getItem('token')}`,
       },
     });
     
     return next.handle(req).pipe(map((event: any)  => {
       if (event.type === HttpEventType.Response) {
-        console.log(event)
         if (event.ok) {
-          return event;//of(event.body);
-        } 
+          return event;
+        }
       } else {
         return event;
       }
@@ -32,7 +31,8 @@ export class AuthInterceptor implements HttpInterceptor {
       switch (event.status) {
         case 401:
           if (event.error.from === 1) {
-            this.spotifyAuth.auth(event.error.authUrl);
+            this.spotifyAuth.setRedirectUrl(this.router.url);
+            this.router.navigateByUrl('/music/spotify/authorize');
           } else {
             this.router.navigateByUrl('/login');
           }

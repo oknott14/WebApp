@@ -7,6 +7,7 @@ import { PlaylistComponent } from './music/playlist/playlist.component';
 import { PlayerPageComponent } from './player-page/player-page.component';
 import { TagTrackComponent } from './music/track/tag-tracks/tag-track.component';
 import { LoginComponent } from './auth/login/login.component';
+import { SpotifyAuthComponent } from './auth/spotify/spotifyAuth.component';
 
 const routes: Routes = [
   {
@@ -28,7 +29,7 @@ const routes: Routes = [
       {
         path: 'untagged',
         component: TagTrackComponent,
-      }
+      },
     ]
   },
   {
@@ -44,6 +45,10 @@ const routes: Routes = [
     redirectTo: '/login',
     pathMatch: 'full'
   },
+  {
+    path: 'music/spotify/authorize',
+    component: SpotifyAuthComponent,
+  }, 
   {
     path: '**',
     redirectTo: 'banking',

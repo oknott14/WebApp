@@ -26,24 +26,29 @@ export interface Playlist {
 
 export interface Track {
     id: string,
-    name: string,
-    album: Album,
-    artists: Artist [],
-    available_markets: Array<any>,
-    disc_number: number,
-    duration_ms: 211653,
-    eppisode: boolean,
-    explicit: boolean,
-    external_ids: any,
-    external_urls: any,
-    href: string,
-    is_local: boolean,
-    popularity: number,
-    preview_url?: string,
-    track: boolean,
-    track_number: number,
-    type: string,
+    spotifyId: string
     uri: string
+    analysisId: string
+    name: string
+    album: any,
+    imageUrls: string[],
+    artists: any,
+    duration: number,
+    explicit: boolean
+    popularity: string,
+    trackNumber: number,
+    danceability: number,
+    energy: number,
+    key: number,
+    loudness: number,
+    mode: number,
+    speechiness: number,
+    acousticness: number,
+    instrumentalness: number,
+    liveness: number,
+    valence: number,
+    tempo: number,
+    time_signature: number,
 }
 
 export interface Album {
@@ -94,4 +99,19 @@ export interface PlaybackInfo {
     is_playing: boolean,
     repeat_state: string,
     shuffle_state: boolean
+}
+
+export interface AudioFeatures {
+    danceability: number,
+    energy: number,
+    key: number,
+    loudness: number,
+    mode: number,
+    speechiness: number,
+    acousticness: number,
+    instrumentalness: number,
+    liveness: number,
+    valence: number,
+    tempo: number,
+    time_signature: number,
 }

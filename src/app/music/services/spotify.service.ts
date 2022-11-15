@@ -25,7 +25,6 @@ export class SpotifyService {
             url += `/${id}`;
         }
         return this.http.get<SpotifyHttpResponse>(url).pipe(map(response => {
-            console.log('hey');
             return this.checkResponse<t>(response);
         }))  
     }

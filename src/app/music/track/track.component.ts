@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Playlist, Track } from '../../models/spotify.models'
+/*import { Playlist, Track } from '../../models/spotify.models'
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, ParamMap } from '@angular/router';
+import { SpotifyService } from '../services/spotify.service';
 
 @Component({
     selector: 'track-container',
@@ -9,10 +10,10 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
     styleUrls: ['./track.component.css']
 })
 export class TrackComponent implements OnInit {
-    @Input('track') track?: Track;
+    tracks: Track [] = [];
     private sub: Subscription = new Subscription();
-    constructor(private route: ActivatedRoute) {}
 
+    constructor()
     ngOnInit(): void {
         
     }
@@ -22,3 +23,4 @@ export class TrackComponent implements OnInit {
     }
 }
 
+*/

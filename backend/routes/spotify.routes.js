@@ -1,15 +1,24 @@
 const express = require('express');
 const auth = require('../api/auth.api');
 const spotifyApi = require('../api/spotify.api'); 
+const errorResponse = require('../shared/http.responses').errorResponse
 const router = express.Router();
 
-//PUBLIC accessable
-router.get('/redir', spotifyApi.updateTokens())
 
-//AUTHORIZATION
 router.use(auth.verifyToken());
 
-//PRIVATE (Sign On Required)
+//AUTH ROUTES
+router.get('/authorization-link', spotifyApi.getAuthUrl())
+router.post('/update-tokens', spotifyApi.updateTokens())
+//SPOUTIFY AUTHORIZATION
+router.use((req, res, next) => {
+    if (req.user.spotify_token_expiration > new Date().valueOf()) {
+        res.status(401).json(errorResponse("Spotify is not authorized", {tokenProvided: false, err: 'Token expired'}, 1))
+    }
+    
+    next();
+});
+
 //PLAYLISTS
 router.get('/user/playlists', spotifyApi.getUserPlaylists());
 router.get('/playlist/:id', spotifyApi.getPlaylist());
@@ -27,10 +36,8 @@ router.post('/previous-track', spotifyApi.previousTrack());
 router.post('/set-shuffle', spotifyApi.setShuffleState());
 router.get('/recent-tracks', spotifyApi.recentTracks());
 
-//Spotify AUTHORIZATION
-router.get('/wait-for-authorization', (req, res, next) => {
-    spotifyApi.waitForAuth().then((resp) => res.json(resp));
-});
+//TRACK ANALYSIS
+router.get('/track/:trackId/audio-features', spotifyApi.getTrackAudioFeatures);
 
 module.exports = router;
 
